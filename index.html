@@ -31,8 +31,9 @@
 </head>
 <body>
 
-  <!-- TODO antes de publicar: reemplazar el número de WhatsApp/teléfono (js/main.js y los enlaces tel:),
-       la zona de cobertura y los enlaces de redes sociales del footer con los datos reales del negocio. -->
+  <!-- TODO antes de publicar: reemplazar el enlace de Facebook (js/main.js, FACEBOOK_URL) usado en el
+       botón "Agenda tu Sesión" con la cuenta de Facebook real del negocio, y los enlaces de redes
+       sociales del footer con los datos reales del negocio. -->
 
   <!-- ══════════════════════════════════════════════════════
        LOADER
@@ -73,7 +74,12 @@
           </ul>
         </nav>
 
-        <a href="#contacto" class="btn-gold nav-cta" style="font-size:13px; padding:12px 26px;">
+        <a href="#xv" class="btn-outline nav-xv-btn" style="font-size:13px; padding:12px 26px;">
+          XV Años
+        </a>
+
+        <a href="#" class="btn-gold nav-cta js-fb-link" target="_blank" rel="noopener noreferrer"
+           style="font-size:13px; padding:12px 26px;">
           Agenda tu Sesión
         </a>
 
@@ -92,7 +98,8 @@
       <a href="#proceso">Proceso</a>
       <a href="#producto">Paquetes</a>
       <a href="#contacto">Contacto</a>
-      <a href="#contacto">Agenda tu Sesión →</a>
+      <a href="#xv">XV Años</a>
+      <a href="#" class="js-fb-link" target="_blank" rel="noopener noreferrer">Agenda tu Sesión →</a>
     </div>
   </header>
 
@@ -102,29 +109,12 @@
   <main>
     <section id="hero" aria-labelledby="hero-heading">
 
-      <!-- Parallax background image (fixed) -->
-      <div class="hero-bg" style="background-image:url('img/boda-baile-velas-recepcion.jpeg')" aria-hidden="true"></div>
-      <!-- Dark overlays -->
-      <div class="hero-overlay" aria-hidden="true"></div>
-      <div class="hero-vignette" aria-hidden="true"></div>
-      <!-- Grid texture -->
-      <div class="hero-grid" aria-hidden="true"></div>
-      <!-- Canvas particle orbs -->
-      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+      <!-- Full-width photo, full height (auto), never cropped -->
+      <img class="hero-bg" src="img/boda-portada-silueta-torre.jpeg" alt="" aria-hidden="true">
+      <!-- Small legibility filter (not a wash over the whole photo) -->
+      <div class="hero-scrim" aria-hidden="true"></div>
 
-      <!-- Light shafts -->
-      <div class="hero-rays" aria-hidden="true">
-        <div class="hero-ray r1"></div>
-        <div class="hero-ray r2"></div>
-        <div class="hero-ray r3"></div>
-        <div class="hero-ray r4"></div>
-        <div class="hero-ray r5"></div>
-      </div>
-      <!-- Film grain overlay -->
-      <div class="hero-grain" aria-hidden="true"></div>
-      <!-- One-shot scan reveal -->
-      <div class="hero-scanline" aria-hidden="true"></div>
-
+      <div class="hero-inner">
       <div class="container">
         <div class="hero-content">
 
@@ -148,7 +138,7 @@
 
           <!-- CTAs -->
           <div class="hero-ctas" id="hero-ctas">
-            <a href="#contacto" class="btn-gold">
+            <a href="#" class="btn-gold js-fb-link" target="_blank" rel="noopener noreferrer">
               Agenda tu Sesión
               <i class="fa-solid fa-arrow-right" style="font-size:12px;"></i>
             </a>
@@ -185,6 +175,7 @@
           <div class="scroll-mouse-dot"></div>
         </div>
       </div>
+      </div><!-- /.hero-inner -->
     </section>
 
     <!-- ══════════════════════════════════════════════════
@@ -277,7 +268,7 @@
           </div>
         </div>
 
-        <div class="ambientes-grid">
+        <div class="ambientes-grid cols-2">
 
           <!-- Bodas -->
           <div class="amb-card reveal">
@@ -296,25 +287,8 @@
             </div>
           </div>
 
-          <!-- XV Años -->
-          <div class="amb-card reveal d1">
-            <img class="amb-img"
-              src="img/xv-quinceanera-fuente-colonial.jpeg"
-              alt="Quinceañera con vestido rosa posando frente a una fuente colonial">
-            <div class="amb-overlay">
-              <div class="amb-icon-wrap"
-                   style="background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.3);"
-                   aria-hidden="true">
-                <i class="fa-solid fa-crown" style="color:white;"></i>
-              </div>
-              <h3>XV Años</h3>
-              <p>Sesiones llenas de magia para celebrar esta transición, con vestidos, locaciones y luz que hacen justicia a la ocasión.</p>
-              <div class="amb-temp">Sesión temática + cobertura del evento</div>
-            </div>
-          </div>
-
           <!-- Sesiones Personales -->
-          <div class="amb-card reveal d2">
+          <div class="amb-card reveal d1">
             <img class="amb-img"
               src="img/pareja-sesion-creativa-aerea.jpeg"
               alt="Sesión de pareja creativa vista desde arriba sobre piso de adoquín"
@@ -356,9 +330,9 @@
             <div class="portfolio-overlay"><span>Bodas</span><i class="fa-solid fa-expand"></i></div>
           </a>
 
-          <a class="portfolio-item reveal d1" role="listitem" href="img/xv-quinceanera-lamparas-jardin.jpeg" data-caption="XV Años">
-            <img src="img/xv-quinceanera-lamparas-jardin.jpeg" alt="Quinceañera girando su vestido rosa bajo lámparas de jardín" loading="lazy">
-            <div class="portfolio-overlay"><span>XV Años</span><i class="fa-solid fa-expand"></i></div>
+          <a class="portfolio-item reveal d1" role="listitem" href="img/boda-novia-ventana-cortinas.jpeg" data-caption="Bodas">
+            <img src="img/boda-novia-ventana-cortinas.jpeg" alt="Novia mirando por la ventana entre cortinas antes de la ceremonia" loading="lazy">
+            <div class="portfolio-overlay"><span>Bodas</span><i class="fa-solid fa-expand"></i></div>
           </a>
 
           <a class="portfolio-item reveal d2" role="listitem" href="img/boda-detalle-anillos-manos.jpeg" data-caption="Detalles">
@@ -366,29 +340,14 @@
             <div class="portfolio-overlay"><span>Detalles</span><i class="fa-solid fa-expand"></i></div>
           </a>
 
-          <a class="portfolio-item reveal" role="listitem" href="img/xv-quinceanera-ramo-sonrisa.jpeg" data-caption="XV Años">
-            <img src="img/xv-quinceanera-ramo-sonrisa.jpeg" alt="Quinceañera sonriendo con ramo de rosas y corona" loading="lazy">
-            <div class="portfolio-overlay"><span>XV Años</span><i class="fa-solid fa-expand"></i></div>
-          </a>
-
-          <a class="portfolio-item reveal d1" role="listitem" href="img/boda-novia-ventana-cortinas.jpeg" data-caption="Bodas">
-            <img src="img/boda-novia-ventana-cortinas.jpeg" alt="Novia mirando por la ventana entre cortinas antes de la ceremonia" loading="lazy">
-            <div class="portfolio-overlay"><span>Bodas</span><i class="fa-solid fa-expand"></i></div>
-          </a>
-
-          <a class="portfolio-item reveal d2" role="listitem" href="img/familia-madre-hija-retrato.jpeg" data-caption="Retratos Familiares">
-            <img src="img/familia-madre-hija-retrato.jpeg" alt="Retrato emotivo de madre e hija frente con frente" loading="lazy">
-            <div class="portfolio-overlay"><span>Familia</span><i class="fa-solid fa-expand"></i></div>
-          </a>
-
           <a class="portfolio-item reveal" role="listitem" href="img/boda-pareja-silueta-artistica.jpeg" data-caption="Bodas">
             <img src="img/boda-pareja-silueta-artistica.jpeg" alt="Silueta artística de una pareja de novios con luces azul y rojo" loading="lazy">
             <div class="portfolio-overlay"><span>Bodas</span><i class="fa-solid fa-expand"></i></div>
           </a>
 
-          <a class="portfolio-item reveal d1" role="listitem" href="img/xv-quinceanera-kiosco-atardecer.jpeg" data-caption="XV Años">
-            <img src="img/xv-quinceanera-kiosco-atardecer.jpeg" alt="Quinceañera posando en un kiosco durante el atardecer" loading="lazy">
-            <div class="portfolio-overlay"><span>XV Años</span><i class="fa-solid fa-expand"></i></div>
+          <a class="portfolio-item reveal d1" role="listitem" href="img/familia-madre-hija-retrato.jpeg" data-caption="Retratos Familiares">
+            <img src="img/familia-madre-hija-retrato.jpeg" alt="Retrato emotivo de madre e hija frente con frente" loading="lazy">
+            <div class="portfolio-overlay"><span>Familia</span><i class="fa-solid fa-expand"></i></div>
           </a>
 
           <a class="portfolio-item reveal d2" role="listitem" href="img/boda-recepcion-risas-novia.jpeg" data-caption="Bodas">
@@ -399,6 +358,21 @@
           <a class="portfolio-item reveal" role="listitem" href="img/pareja-sesion-casual-piso.jpeg" data-caption="Sesiones Personales">
             <img src="img/pareja-sesion-casual-piso.jpeg" alt="Pareja en sesión casual sentada sobre piso de mosaico azul" loading="lazy">
             <div class="portfolio-overlay"><span>Sesiones</span><i class="fa-solid fa-expand"></i></div>
+          </a>
+
+          <a class="portfolio-item reveal d1" role="listitem" href="img/xv-quinceanera-lamparas-jardin.jpeg" data-caption="XV Años">
+            <img src="img/xv-quinceanera-lamparas-jardin.jpeg" alt="Quinceañera girando su vestido rosa bajo lámparas de jardín" loading="lazy">
+            <div class="portfolio-overlay"><span>XV Años</span><i class="fa-solid fa-expand"></i></div>
+          </a>
+
+          <a class="portfolio-item reveal d2" role="listitem" href="img/xv-quinceanera-ramo-sonrisa.jpeg" data-caption="XV Años">
+            <img src="img/xv-quinceanera-ramo-sonrisa.jpeg" alt="Quinceañera sonriendo con ramo de rosas y corona" loading="lazy">
+            <div class="portfolio-overlay"><span>XV Años</span><i class="fa-solid fa-expand"></i></div>
+          </a>
+
+          <a class="portfolio-item reveal" role="listitem" href="img/xv-quinceanera-kiosco-atardecer.jpeg" data-caption="XV Años">
+            <img src="img/xv-quinceanera-kiosco-atardecer.jpeg" alt="Quinceañera posando en un kiosco durante el atardecer" loading="lazy">
+            <div class="portfolio-overlay"><span>XV Años</span><i class="fa-solid fa-expand"></i></div>
           </a>
 
         </div>
@@ -491,33 +465,14 @@
                 </div>
               </li>
             </ul>
-
-            <div class="specs-bar" role="list" aria-label="Highlights del paquete">
-              <div class="spec-cell" role="listitem">
-                <span class="spec-val">100%</span>
-                <span class="spec-name">Personalizado</span>
-              </div>
-              <div class="spec-cell" role="listitem">
-                <span class="spec-val">Pro</span>
-                <span class="spec-name">Edición Artesanal</span>
-              </div>
-              <div class="spec-cell" role="listitem">
-                <span class="spec-val">HD+</span>
-                <span class="spec-name">Alta Resolución</span>
-              </div>
-              <div class="spec-cell" role="listitem">
-                <span class="spec-val">2</span>
-                <span class="spec-name">Formatos de Entrega</span>
-              </div>
-            </div>
           </div>
 
           <!-- Visual -->
           <div class="reveal d2">
             <div class="panel-scene">
               <div class="package-photo"
-                   style="background-image:url('img/xv-quinceanera-arco-dorado.jpeg')"
-                   role="img" aria-label="Quinceañera con vestido dorado bajo un arco de piedra">
+                   style="background-image:url('img/boda-entrada-recepcion-novios.jpeg')"
+                   role="img" aria-label="Novios bailando durante su entrada a la recepción de la boda">
               </div>
               <div class="p-badge pb-tl" aria-hidden="true">
                 <div class="p-badge-dot"></div>
@@ -614,6 +569,44 @@
     </section>
 
     <!-- ══════════════════════════════════════════════════
+         XV AÑOS — Sección aparte
+    ══════════════════════════════════════════════════ -->
+    <section id="xv" aria-labelledby="xv-heading">
+      <div class="container">
+
+        <div class="ambientes-top">
+          <div class="reveal">
+            <div class="label">XV Años</div>
+            <h2 class="section-title" id="xv-heading">
+              Celebra tus <span class="gold">XV Años</span>
+            </h2>
+          </div>
+        </div>
+
+        <div class="ambientes-grid cols-1">
+
+          <!-- XV Años -->
+          <div class="amb-card reveal">
+            <img class="amb-img"
+              src="img/xv-quinceanera-fuente-colonial.jpeg"
+              alt="Quinceañera con vestido rosa posando frente a una fuente colonial">
+            <div class="amb-overlay">
+              <div class="amb-icon-wrap"
+                   style="background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.3);"
+                   aria-hidden="true">
+                <i class="fa-solid fa-crown" style="color:white;"></i>
+              </div>
+              <h3>XV Años</h3>
+              <p>Sesiones llenas de magia para celebrar esta transición, con vestidos, locaciones y luz que hacen justicia a la ocasión.</p>
+              <div class="amb-temp">Sesión temática + cobertura del evento</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
          CONTACTO
     ══════════════════════════════════════════════════ -->
     <section id="contacto" aria-labelledby="contact-heading">
@@ -641,7 +634,7 @@
                 </div>
                 <div class="ci-body">
                   <h4>Zona de Cobertura</h4>
-                  <p>[Agrega aquí tu ciudad o zona de cobertura]</p>
+                  <p>Sur de Jalisco, Colima, Sahuayo y alrededores</p>
                 </div>
               </li>
               <li class="ci-item">
@@ -651,7 +644,7 @@
                 <div class="ci-body">
                   <h4>Teléfono</h4>
                   <p>
-                    <a href="tel:+520000000000">[Agrega tu número de teléfono]</a>
+                    <a href="tel:+523411077869">341 107 78 69</a>
                   </p>
                 </div>
               </li>

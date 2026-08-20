@@ -2,11 +2,13 @@
    PHOTOSINTESIS — main.js
    TODO: reemplaza WHATSAPP_NUMBER con el número real del negocio
    (formato internacional sin signos, ej. "521XXXXXXXXXX").
+   TODO: reemplaza FACEBOOK_URL con la cuenta de Facebook real del negocio.
 ══════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
 
   var WHATSAPP_NUMBER = '521XXXXXXXXXX';
+  var FACEBOOK_URL = 'https://www.facebook.com/PENDIENTE';
 
   document.addEventListener('DOMContentLoaded', function () {
     initLoader();
@@ -18,6 +20,7 @@
     initCounters();
     initPortfolioLightbox();
     initWhatsAppLinks();
+    initFacebookLinks();
     initContactForm();
     initFooterYear();
   });
@@ -248,6 +251,13 @@
     var defaultMsg = 'Hola, visité su sitio web y me gustaría más información.';
     document.querySelectorAll('.js-wa-link').forEach(function (a) {
       a.setAttribute('href', 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(defaultMsg));
+    });
+  }
+
+  /* ---------- Facebook links (botón "Agenda tu Sesión") ---------- */
+  function initFacebookLinks() {
+    document.querySelectorAll('.js-fb-link').forEach(function (a) {
+      a.setAttribute('href', FACEBOOK_URL);
     });
   }
 
