@@ -1,14 +1,11 @@
 /* ══════════════════════════════════════════════════════════
    PHOTOSINTESIS — main.js
-   TODO: reemplaza FACEBOOK_URL con la cuenta de Facebook real del negocio.
-   TODO: reemplaza MESSENGER_URL con el enlace m.me real del negocio
-   (formato "https://m.me/usuario-o-id-de-la-pagina").
 ══════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
 
-  var FACEBOOK_URL = 'https://www.facebook.com/PENDIENTE';
-  var MESSENGER_URL = 'https://m.me/PENDIENTE';
+  var FACEBOOK_URL = 'https://www.facebook.com/ezequiel.fotografia';
+  var MESSENGER_URL = 'https://m.me/ezequiel.fotografia';
 
   document.addEventListener('DOMContentLoaded', function () {
     initLoader();
