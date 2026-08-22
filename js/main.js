@@ -54,11 +54,8 @@
       if (y > 40) navbar.classList.add('scrolled');
       else navbar.classList.remove('scrolled');
 
-      // Below the desktop nav breakpoint the hamburger is the only way to
-      // reach the menu, so the navbar must never auto-hide there.
       var menuOpen = mobMenu && mobMenu.classList.contains('open');
-      var isCompact = window.innerWidth < 980;
-      if (!menuOpen && !isCompact) {
+      if (!menuOpen) {
         if (y > lastY && y > 160) {
           navbar.classList.add('nav-hidden');
         } else if (y < lastY) {
