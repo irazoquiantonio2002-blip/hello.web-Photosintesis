@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Photosintesis | Fotografía de Bodas, XV Años y Sesiones Personales</title>
-  <meta name="description" content="Estudio fotográfico especializado en bodas, XV años, graduaciones y sesiones personales. Fotografía artística y emotiva, con atención al detalle y un ambiente cómodo para cada cliente. Creamos recuerdos para siempre.">
+  <meta name="description" content="Somos Photosíntesis, un equipo de fotógrafos apasionados y esposos, dedicados a capturar los momentos más especiales de tu vida. Fotografía de bodas, XV años y sesiones personales con un enfoque romántico, elegante y lleno de vida.">
   <meta name="keywords" content="fotografía de bodas, fotógrafo de XV años, sesiones fotográficas, fotografía de graduación, estudio fotográfico, retratos familiares, fotografía de eventos, Photosintesis">
-  <meta name="theme-color" content="#0b0a0d">
-  <meta property="og:title" content="Photosintesis | Creamos recuerdos para siempre">
-  <meta property="og:description" content="Fotografía artística y emotiva para bodas, XV años, graduaciones y sesiones personales.">
+  <meta name="theme-color" content="#faf6ee">
+  <meta property="og:title" content="Photosintesis | Wedding Photography">
+  <meta property="og:description" content="Un equipo de fotógrafos apasionados y esposos, dedicados a capturar los momentos más especiales de tu vida.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="img/boda-pareja-beso-atardecer.jpeg">
 
@@ -30,6 +30,8 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+
+  <div id="scroll-progress" aria-hidden="true"><div id="scroll-progress-fill"></div></div>
 
   <!-- TODO antes de publicar: reemplazar el enlace de Facebook (js/main.js, FACEBOOK_URL) usado en el
        botón "Agenda tu Sesión" con la cuenta de Facebook real del negocio, y los enlaces de redes
@@ -65,21 +67,21 @@
 
         <nav aria-label="Navegación principal">
           <ul class="nav-links">
-            <li><a href="#why">Nosotros</a></li>
-            <li><a href="#ambientes">Servicios</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#servicios">Servicios</a></li>
             <li><a href="#portafolio">Portafolio</a></li>
-            <li><a href="#proceso">Proceso</a></li>
-            <li><a href="#producto">Paquetes</a></li>
+            <li><a href="#paquetes">Paquetes</a></li>
+            <li><a href="#faq">Preguntas</a></li>
             <li><a href="#contacto">Contacto</a></li>
           </ul>
         </nav>
 
-        <a href="#xv" class="btn-outline nav-xv-btn" style="font-size:13px; padding:12px 26px;">
+        <a href="#xv" class="btn-line nav-xv-btn" style="font-size:12px; padding:12px 24px;">
           XV Años
         </a>
 
         <a href="#" class="btn-gold nav-cta js-fb-link" target="_blank" rel="noopener noreferrer"
-           style="font-size:13px; padding:12px 26px;">
+           style="font-size:12px; padding:12px 24px;">
           Agenda tu Sesión
         </a>
 
@@ -89,82 +91,50 @@
         </button>
       </div>
     </div>
-
-    <!-- Mobile menu -->
-    <div id="mob-menu" aria-label="Menú móvil">
-      <a href="#why">Nosotros</a>
-      <a href="#ambientes">Servicios</a>
-      <a href="#portafolio">Portafolio</a>
-      <a href="#proceso">Proceso</a>
-      <a href="#producto">Paquetes</a>
-      <a href="#contacto">Contacto</a>
-      <a href="#xv">XV Años</a>
-      <a href="#" class="js-fb-link" target="_blank" rel="noopener noreferrer">Agenda tu Sesión →</a>
-    </div>
   </header>
 
+  <!-- Mobile menu — lives outside <header> on purpose: #navbar.scrolled uses
+       backdrop-filter, which would turn the header into the containing block
+       for this fixed-position panel and shrink it to the header's own height. -->
+  <div id="mob-menu" aria-label="Menú móvil">
+    <a href="#nosotros">Nosotros</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#portafolio">Portafolio</a>
+    <a href="#paquetes">Paquetes</a>
+    <a href="#faq">Preguntas</a>
+    <a href="#contacto">Contacto</a>
+    <a href="#xv">XV Años</a>
+    <a href="#" class="js-fb-link" target="_blank" rel="noopener noreferrer">Agenda tu Sesión →</a>
+  </div>
+
   <!-- ══════════════════════════════════════════════════════
-       HERO
+       HERO — foto completa, sin recortar
   ══════════════════════════════════════════════════════ -->
   <main>
     <section id="hero" aria-labelledby="hero-heading">
 
       <!-- Full-width photo, full height (auto), never cropped -->
       <img class="hero-bg" src="img/boda-portada-silueta-torre.jpeg" alt="" aria-hidden="true">
-      <!-- Small legibility filter (not a wash over the whole photo) -->
       <div class="hero-scrim" aria-hidden="true"></div>
+      <div class="hero-grain" aria-hidden="true"></div>
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
 
-      <div class="hero-inner">
+      <div class="hero-inner" id="hero-parallax">
       <div class="container">
         <div class="hero-content">
 
-          <!-- Live badge -->
-          <div class="hero-badge" id="hero-badge" aria-hidden="true">
-            <div class="badge-dot"></div>
-            Estudio Fotográfico · Bodas &amp; XV Años
-          </div>
+          <div class="hero-kicker" id="hero-badge" aria-hidden="true">Wedding Photography</div>
 
-          <!-- Animated title -->
           <h1 class="hero-title" id="hero-heading">
             <span class="line"><span>No solo tomamos</span></span>
             <span class="line"><span>fotografías,</span></span>
             <span class="line"><span class="accent">creamos recuerdos.</span></span>
           </h1>
 
-          <!-- Subtitle -->
-          <p class="hero-sub" id="hero-sub">
-            En <strong>Photosintesis</strong> convertimos bodas, XV años y sesiones personales en historias visuales llenas de emoción — con atención al detalle y un ambiente cómodo para que solo te preocupes por disfrutar el momento.
-          </p>
-
-          <!-- CTAs -->
-          <div class="hero-ctas" id="hero-ctas">
-            <a href="#" class="btn-gold js-fb-link" target="_blank" rel="noopener noreferrer">
-              Agenda tu Sesión
-              <i class="fa-solid fa-arrow-right" style="font-size:12px;"></i>
-            </a>
-            <a href="#portafolio" class="btn-outline">
-              <i class="fa-solid fa-camera-retro" style="font-size:15px; color:var(--gray);"></i>
-              Ver Portafolio
-            </a>
-          </div>
-
-          <!-- Trust bar -->
-          <div class="hero-trust" id="hero-trust" aria-label="Servicios destacados">
-            <div class="trust-item">
-              <i class="fa-solid fa-heart"></i>
-              Bodas &amp; XV Años
-            </div>
-            <div class="trust-divider" aria-hidden="true"></div>
-            <div class="trust-item">
-              <i class="fa-solid fa-camera-retro"></i>
-              Sesiones Personales
-            </div>
-            <div class="trust-divider" aria-hidden="true"></div>
-            <div class="trust-item">
-              <i class="fa-solid fa-wand-magic-sparkles"></i>
-              Edición Artística Incluida
-            </div>
-          </div>
+          <a href="#" class="btn-gold js-fb-link" id="hero-cta" target="_blank" rel="noopener noreferrer">
+            Agenda tu Sesión
+            <i class="fa-solid fa-arrow-right" style="font-size:12px;"></i>
+          </a>
 
         </div><!-- /.hero-content -->
       </div>
@@ -186,60 +156,29 @@
     </div>
 
     <!-- ══════════════════════════════════════════════════
-         WHY — Diferenciadores
+         NOSOTROS — Quiénes somos (copy literal del PDF)
     ══════════════════════════════════════════════════ -->
-    <section id="why" aria-labelledby="why-heading">
+    <section id="nosotros" aria-labelledby="nosotros-heading">
       <div class="container">
+        <div class="nosotros-grid">
 
-        <div class="why-header">
           <div class="reveal">
-            <div class="label">La diferencia Photosintesis</div>
-            <h2 class="why-quote" id="why-heading">
-              La belleza no siempre está en la pose perfecta…
-              <em> está en el instante genuino.</em>
+            <div class="nosotros-media">
+              <img src="img/boda-pareja-silueta-artistica.jpeg" alt="Silueta artística de una pareja de novios con luces azul y rojo" loading="lazy">
+              <div class="nosotros-frame" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <div class="nosotros-copy reveal d2">
+            <div class="ornament"><span>Quiénes Somos</span></div>
+            <h2 class="why-quote" id="nosotros-heading">
+              "¡Hola! Somos Photosíntesis, un equipo de fotógrafos apasionados y esposos, dedicados a capturar los momentos más especiales de tu vida.
             </h2>
-          </div>
-          <p class="why-sub reveal d2">
-            Combinamos una mirada artística con experiencia en fotografía de eventos para capturar la emoción real de cada celebración — sin poses forzadas, sin prisa.
-          </p>
-        </div>
-
-        <div class="features-grid">
-
-          <div class="f-card reveal">
-            <div class="f-num" aria-hidden="true">01</div>
-            <div class="f-icon" aria-hidden="true">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
-            <h3>Atención al Detalle</h3>
-            <p>Cuidamos cada elemento de la escena —luz, composición y momento— para que cada fotografía cuente una historia completa.</p>
-          </div>
-
-          <div class="f-card reveal d1">
-            <div class="f-num" aria-hidden="true">02</div>
-            <div class="f-icon" aria-hidden="true">
-              <i class="fa-solid fa-couch"></i>
-            </div>
-            <h3>Ambiente Cómodo</h3>
-            <p>Creamos un espacio relajado durante la sesión para que te olvides de la cámara y simplemente vivas el momento.</p>
-          </div>
-
-          <div class="f-card reveal d2">
-            <div class="f-num" aria-hidden="true">03</div>
-            <div class="f-icon" aria-hidden="true">
-              <i class="fa-solid fa-palette"></i>
-            </div>
-            <h3>Imágenes Artísticas y Emotivas</h3>
-            <p>Cada entrega combina técnica y sensibilidad para lograr fotografías con carácter propio, no solo un registro del evento.</p>
-          </div>
-
-          <div class="f-card reveal d3">
-            <div class="f-num" aria-hidden="true">04</div>
-            <div class="f-icon" aria-hidden="true">
-              <i class="fa-solid fa-shield-halved"></i>
-            </div>
-            <h3>Entrega Profesional</h3>
-            <p>Edición cuidada y alta resolución, con acompañamiento desde la primera plática hasta la galería final.</p>
+            <p>Juntos, combinamos nuestras habilidades y experiencia para brindarte un enfoque único y completo en cada sesión fotográfica.</p>
+            <p>Como esposos, entendemos la importancia de los momentos memorables y sabemos lo valioso que es documentarlos de manera auténtica y emotiva. Nos encanta trabajar en conjunto y plasmar la belleza de las historias de amor a través de nuestras fotografías.</p>
+            <p>Nuestro estilo se caracteriza por ser romántico, elegante y lleno de vida. Nos enfocamos en capturar los detalles más pequeños y los gestos más sinceros, para que cada imagen cuente una historia única. Nos esforzamos por capturar la esencia de cada pareja y transmitir la conexión especial que comparten.</p>
+            <p>Además de nuestra pasión por la fotografía, nos enorgullece ofrecer un servicio cálido, profesional y personalizado. Nos comprometemos a crear un ambiente relajado y divertido durante las sesiones, para que te sientas cómodo y puedas disfrutar al máximo de cada momento.</p>
+            <p>Si estás buscando un equipo de fotógrafos que se dedique a capturar la magia de tu historia de amor, estaremos encantados de ser parte de ella. Permítenos capturar esos momentos inolvidables y transformarlos en recuerdos duraderos."</p>
           </div>
 
         </div>
@@ -247,25 +186,35 @@
     </section>
 
     <!-- ══════════════════════════════════════════════════
-         AMBIENTES — Tipos de sesión
+         CITA EMOTIVA (copy literal del PDF)
     ══════════════════════════════════════════════════ -->
-    <section id="ambientes" aria-labelledby="amb-heading">
+    <section id="cita" class="section-dark" aria-label="Frase">
+      <div class="cita-bg" aria-hidden="true">
+        <img src="img/boda-pareja-beso-atardecer.jpeg" alt="" loading="lazy">
+      </div>
+      <div class="cita-content reveal">
+        <p class="cita-quote">"El día pasa en un suspiro… pero las fotos lo hacen eterno."</p>
+        <p class="cita-sub">Nuestro trabajo es capturar todos esos momentos y emociones para que puedan volver a vivirlo cada vez que lo necesiten.</p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+         SERVICIOS — Tipos de sesión
+    ══════════════════════════════════════════════════ -->
+    <section id="servicios" aria-labelledby="serv-heading">
       <div class="container">
 
         <div class="ambientes-top">
           <div class="reveal">
-            <div class="label">Nuestros Servicios</div>
-            <h2 class="section-title" id="amb-heading">
+            <div class="ornament"><span>Nuestros Servicios</span></div>
+            <h2 class="section-title" id="serv-heading">
               Cada ocasión merece<br>
               <span class="gold">su propia mirada</span>
             </h2>
-            <p style="color:var(--gray); margin-top:16px; font-size:15.5px; max-width:440px; line-height:1.7;">
-              Elige el tipo de sesión que mejor cuenta tu historia.
-            </p>
           </div>
-          <div class="reveal d2">
-            <span class="ambiente-pill">¿Cuál es tu ocasión?</span>
-          </div>
+          <p class="reveal d2" style="color:var(--ink-soft); font-size:15px; max-width:400px; line-height:1.75;">
+            Elige el tipo de sesión que mejor cuenta tu historia.
+          </p>
         </div>
 
         <div class="ambientes-grid cols-2">
@@ -277,7 +226,7 @@
               alt="Novios posando frente a arcos coloniales el día de su boda">
             <div class="amb-overlay">
               <div class="amb-icon-wrap"
-                   style="background:rgba(201,162,77,0.15); border-color:rgba(231,200,119,0.4);"
+                   style="background:rgba(207,168,85,0.12); border-color:rgba(207,168,85,0.4);"
                    aria-hidden="true">
                 <i class="fa-solid fa-heart" style="color:var(--gold-light);"></i>
               </div>
@@ -295,7 +244,7 @@
               style="object-position:center 30%;">
             <div class="amb-overlay">
               <div class="amb-icon-wrap"
-                   style="background:rgba(201,162,77,0.15); border-color:rgba(231,200,119,0.4);"
+                   style="background:rgba(207,168,85,0.12); border-color:rgba(207,168,85,0.4);"
                    aria-hidden="true">
                 <i class="fa-solid fa-camera-retro" style="color:var(--gold-light);"></i>
               </div>
@@ -316,7 +265,7 @@
       <div class="container">
 
         <div class="portfolio-hdr reveal">
-          <div class="label">Portafolio</div>
+          <div class="ornament" style="justify-content:center;"><span>Portafolio</span></div>
           <h2 class="section-title" id="portfolio-heading">
             Momentos que <span class="gold">ya capturamos</span>
           </h2>
@@ -325,23 +274,23 @@
 
         <div class="portfolio-grid" role="list">
 
-          <a class="portfolio-item reveal" role="listitem" href="img/boda-pareja-beso-atardecer.jpeg" data-caption="Bodas">
-            <img src="img/boda-pareja-beso-atardecer.jpeg" alt="Novios besándose frente al mar durante el atardecer" loading="lazy">
-            <div class="portfolio-overlay"><span>Bodas</span><i class="fa-solid fa-expand"></i></div>
-          </a>
-
-          <a class="portfolio-item reveal d1" role="listitem" href="img/boda-novia-ventana-cortinas.jpeg" data-caption="Bodas">
-            <img src="img/boda-novia-ventana-cortinas.jpeg" alt="Novia mirando por la ventana entre cortinas antes de la ceremonia" loading="lazy">
-            <div class="portfolio-overlay"><span>Bodas</span><i class="fa-solid fa-expand"></i></div>
-          </a>
-
-          <a class="portfolio-item reveal d2" role="listitem" href="img/boda-detalle-anillos-manos.jpeg" data-caption="Detalles">
+          <a class="portfolio-item reveal" role="listitem" href="img/boda-detalle-anillos-manos.jpeg" data-caption="Detalles">
             <img src="img/boda-detalle-anillos-manos.jpeg" alt="Detalle del anillo de compromiso sostenido en las manos de la novia" loading="lazy">
             <div class="portfolio-overlay"><span>Detalles</span><i class="fa-solid fa-expand"></i></div>
           </a>
 
-          <a class="portfolio-item reveal" role="listitem" href="img/boda-pareja-silueta-artistica.jpeg" data-caption="Bodas">
-            <img src="img/boda-pareja-silueta-artistica.jpeg" alt="Silueta artística de una pareja de novios con luces azul y rojo" loading="lazy">
+          <a class="portfolio-item reveal d1" role="listitem" href="img/boda-pareja-atardecer-muelle.jpeg" data-caption="Bodas">
+            <img src="img/boda-pareja-atardecer-muelle.jpeg" alt="Pareja de novios abrazados en un muelle durante el atardecer" loading="lazy">
+            <div class="portfolio-overlay"><span>Bodas</span><i class="fa-solid fa-expand"></i></div>
+          </a>
+
+          <a class="portfolio-item reveal d2" role="listitem" href="img/boda-pareja-luces-noche.jpeg" data-caption="Bodas">
+            <img src="img/boda-pareja-luces-noche.jpeg" alt="Pareja de novios entre luces por la noche" loading="lazy">
+            <div class="portfolio-overlay"><span>Bodas</span><i class="fa-solid fa-expand"></i></div>
+          </a>
+
+          <a class="portfolio-item reveal" role="listitem" href="img/boda-recepcion-risas-novia.jpeg" data-caption="Bodas">
+            <img src="img/boda-recepcion-risas-novia.jpeg" alt="Novia riendo durante un momento espontáneo de la recepción" loading="lazy">
             <div class="portfolio-overlay"><span>Bodas</span><i class="fa-solid fa-expand"></i></div>
           </a>
 
@@ -350,14 +299,14 @@
             <div class="portfolio-overlay"><span>Familia</span><i class="fa-solid fa-expand"></i></div>
           </a>
 
-          <a class="portfolio-item reveal d2" role="listitem" href="img/boda-recepcion-risas-novia.jpeg" data-caption="Bodas">
-            <img src="img/boda-recepcion-risas-novia.jpeg" alt="Novia riendo durante un momento espontáneo de la recepción" loading="lazy">
-            <div class="portfolio-overlay"><span>Bodas</span><i class="fa-solid fa-expand"></i></div>
-          </a>
-
-          <a class="portfolio-item reveal" role="listitem" href="img/pareja-sesion-casual-piso.jpeg" data-caption="Sesiones Personales">
+          <a class="portfolio-item reveal d2" role="listitem" href="img/pareja-sesion-casual-piso.jpeg" data-caption="Sesiones Personales">
             <img src="img/pareja-sesion-casual-piso.jpeg" alt="Pareja en sesión casual sentada sobre piso de mosaico azul" loading="lazy">
             <div class="portfolio-overlay"><span>Sesiones</span><i class="fa-solid fa-expand"></i></div>
+          </a>
+
+          <a class="portfolio-item reveal" role="listitem" href="img/xv-quinceanera-arco-dorado.jpeg" data-caption="XV Años">
+            <img src="img/xv-quinceanera-arco-dorado.jpeg" alt="Quinceañera posando bajo un arco dorado" loading="lazy">
+            <div class="portfolio-overlay"><span>XV Años</span><i class="fa-solid fa-expand"></i></div>
           </a>
 
           <a class="portfolio-item reveal d1" role="listitem" href="img/xv-quinceanera-lamparas-jardin.jpeg" data-caption="XV Años">
@@ -365,12 +314,7 @@
             <div class="portfolio-overlay"><span>XV Años</span><i class="fa-solid fa-expand"></i></div>
           </a>
 
-          <a class="portfolio-item reveal d2" role="listitem" href="img/xv-quinceanera-ramo-sonrisa.jpeg" data-caption="XV Años">
-            <img src="img/xv-quinceanera-ramo-sonrisa.jpeg" alt="Quinceañera sonriendo con ramo de rosas y corona" loading="lazy">
-            <div class="portfolio-overlay"><span>XV Años</span><i class="fa-solid fa-expand"></i></div>
-          </a>
-
-          <a class="portfolio-item reveal" role="listitem" href="img/xv-quinceanera-kiosco-atardecer.jpeg" data-caption="XV Años">
+          <a class="portfolio-item reveal d2" role="listitem" href="img/xv-quinceanera-kiosco-atardecer.jpeg" data-caption="XV Años">
             <img src="img/xv-quinceanera-kiosco-atardecer.jpeg" alt="Quinceañera posando en un kiosco durante el atardecer" loading="lazy">
             <div class="portfolio-overlay"><span>XV Años</span><i class="fa-solid fa-expand"></i></div>
           </a>
@@ -380,107 +324,59 @@
     </section>
 
     <!-- ══════════════════════════════════════════════════
-         PROCESO — Cómo trabajamos
+         PROCESO — Nuestra forma de trabajar (copy literal del PDF)
     ══════════════════════════════════════════════════ -->
     <section id="proceso" aria-labelledby="proceso-heading">
       <div class="container">
+        <div class="proceso-wrap">
 
-        <div class="proceso-header reveal">
-          <div class="label">Cómo trabajamos</div>
-          <h2 class="section-title" id="proceso-heading">
-            Simple, cercano y <span class="gold">profesional</span>
-          </h2>
-          <p>De la primera plática al álbum final, te acompañamos en cada paso para que solo pienses en disfrutar.</p>
-        </div>
-
-        <div class="proceso-grid">
-
-          <div class="proceso-step reveal">
-            <div class="step-number">Paso 01</div>
-            <h3>Platicamos tu Historia</h3>
-            <p>Conversamos sobre la ocasión, el estilo que buscas y la locación, para diseñar una sesión a tu medida.</p>
-          </div>
-
-          <div class="proceso-step reveal d1">
-            <div class="step-number">Paso 02</div>
-            <h3>Sesión Fotográfica</h3>
-            <p>El día del evento o de tu sesión, creamos un ambiente cómodo mientras capturamos cada instante genuino.</p>
-          </div>
-
-          <div class="proceso-step reveal d2">
-            <div class="step-number">Paso 03</div>
-            <h3>Edición &amp; Entrega</h3>
-            <p>Seleccionamos y retocamos con cuidado artesanal las mejores tomas, y te entregamos tu galería lista para atesorar.</p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════════════
-         PAQUETE DESTACADO
-    ══════════════════════════════════════════════════ -->
-    <section id="producto" aria-labelledby="prod-heading">
-      <div class="container">
-        <div class="producto-wrap">
-
-          <!-- Info -->
           <div class="reveal">
-            <div class="label">Paquete Destacado</div>
-            <h2 class="section-title" id="prod-heading">
-              Una experiencia completa,<br>
-              <span class="gold">de principio a fin</span>
-            </h2>
-            <p class="producto-lead">
-              Nuestro paquete integral para bodas y XV años reúne todo lo necesario para documentar tu evento con calidad artística — sin que tengas que preocuparte por nada el gran día.
-            </p>
-
-            <ul class="feature-rows" aria-label="Qué incluye el paquete destacado">
-              <li class="f-row">
-                <div class="f-row-icon" aria-hidden="true"><i class="fa-regular fa-images"></i></div>
-                <div>
-                  <h4>Cobertura Completa</h4>
-                  <p>Acompañamiento fotográfico durante todo el evento, desde los preparativos hasta la fiesta.</p>
-                </div>
-              </li>
-              <li class="f-row">
-                <div class="f-row-icon" aria-hidden="true"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-                <div>
-                  <h4>Edición Artística</h4>
-                  <p>Retoque profesional en cada imagen seleccionada, cuidando color, luz y composición.</p>
-                </div>
-              </li>
-              <li class="f-row">
-                <div class="f-row-icon" aria-hidden="true"><i class="fa-solid fa-couch"></i></div>
-                <div>
-                  <h4>Ambiente Cómodo</h4>
-                  <p>Dirección relajada durante la sesión para lograr expresiones genuinas, no poses forzadas.</p>
-                </div>
-              </li>
-              <li class="f-row">
-                <div class="f-row-icon" aria-hidden="true"><i class="fa-solid fa-download"></i></div>
-                <div>
-                  <h4>Entrega Digital + Impresa</h4>
-                  <p>Galería en alta resolución y opción de impresión fina para conservar tus recuerdos.</p>
-                </div>
-              </li>
-            </ul>
+            <div class="proceso-media">
+              <img src="img/boda-novia-espejo-preparacion.jpeg" alt="Novia terminando de arreglarse frente al espejo antes de la boda" loading="lazy">
+            </div>
           </div>
 
-          <!-- Visual -->
           <div class="reveal d2">
-            <div class="panel-scene">
-              <div class="package-photo"
-                   style="background-image:url('img/boda-entrada-recepcion-novios.jpeg')"
-                   role="img" aria-label="Novios bailando durante su entrada a la recepción de la boda">
+            <div class="proceso-header">
+              <div class="ornament"><span>Nuestra Forma de Trabajar</span></div>
+              <h2 class="section-title" id="proceso-heading">
+                Simple, cercano y <span class="gold">profesional</span>
+              </h2>
+              <p>Cada imagen está pensada para contar la historia real de tu boda, con toda la emoción, naturalidad y sensibilidad que merece. Desde los preparativos hasta el último abrazo, acompañamos cada momento con discreción y mirada atenta.</p>
+            </div>
+            <p class="proceso-kicker">Mira cómo es el proceso completo:</p>
+
+            <div class="proceso-list">
+              <div class="proceso-step">
+                <div class="step-number">1</div>
+                <div>
+                  <h3>Planificación Personalizada</h3>
+                  <p>Antes del gran día, nos reunimos de manera presencial o virtual para conocer su historia, entender lo que más valoran y definir cada detalle de la cobertura. Nada se deja al azar. (es necesario hablar de algunos puntos que el organizador no aborda).</p>
+                </div>
               </div>
-              <div class="p-badge pb-tl" aria-hidden="true">
-                <div class="p-badge-dot"></div>
-                Sesión Personalizada
+
+              <div class="proceso-step">
+                <div class="step-number">2</div>
+                <div>
+                  <h3>Cobertura Natural y Discreta</h3>
+                  <p>Durante la boda, capturamos momentos reales sin interrumpir lo que está sucediendo. Nos movemos con discreción, respetando el ritmo del evento.</p>
+                </div>
               </div>
-              <div class="p-badge pb-br" aria-hidden="true">
-                <i class="fa-solid fa-star" style="color:var(--gold);"></i>
-                Calidad Artística
+
+              <div class="proceso-step">
+                <div class="step-number">3</div>
+                <div>
+                  <h3>Emoción en Cada Fotografía</h3>
+                  <p>No buscamos poses forzadas. estamos atentos a las miradas, gestos y emociones auténticas que cuenten la historia tal como sucedio en ese gran día.</p>
+                </div>
+              </div>
+
+              <div class="proceso-step">
+                <div class="step-number">4</div>
+                <div>
+                  <h3>Entrega Cuidada y Profesional</h3>
+                  <p>Reciben una selección de fotos editadas con detalle y sensibilidad, listas para revivir su día una y otra vez. También pueden elegir álbumes o productos impresos para conservar cada recuerdo.</p>
+                </div>
               </div>
             </div>
           </div>
@@ -490,38 +386,81 @@
     </section>
 
     <!-- ══════════════════════════════════════════════════
-         STATS
+         PAQUETES FOTOGRÁFICOS (copy literal del PDF, sin precio)
     ══════════════════════════════════════════════════ -->
-    <section id="stats" aria-label="Compromisos del estudio">
+    <section id="paquetes" aria-labelledby="paquetes-heading">
       <div class="container">
-        <div class="stats-grid reveal" role="list">
 
-          <div class="stat-cell" role="listitem">
-            <div class="stat-num"
-                 data-count="100" data-suffix="%"
-                 aria-label="100 por ciento">0</div>
-            <div class="stat-lbl">Dedicación<br>en cada sesión</div>
+        <div class="paquetes-hdr reveal">
+          <div class="ornament" style="justify-content:center;"><span>Paquetes Fotográficos</span></div>
+          <h2 class="section-title" id="paquetes-heading">
+            La cobertura que mejor <span class="gold">cuenta tu historia</span>
+          </h2>
+          <p>Cada boda es diferente. Por eso estructuramos nuestras coberturas pensando en distintos niveles de acompañamiento y tranquilidad. Más que vender horas o fotografías, buscamos ofrecer la experiencia que mejor se adapte a la historia que quieren contar.</p>
+        </div>
+
+        <div class="paquetes-grid">
+
+          <!-- PREMIUM -->
+          <div class="pkg-card featured reveal">
+            <div class="pkg-featured-tag">Más elegido</div>
+            <div class="pkg-media">
+              <img src="img/boda-entrada-recepcion-novios.jpeg" alt="Novios bailando durante su entrada a la recepción de la boda" loading="lazy">
+            </div>
+            <div class="pkg-body">
+              <h3 class="pkg-name">Premium</h3>
+              <div class="pkg-subtitle">Cobertura integral para vivir el día sin preocupaciones</div>
+              <p class="pkg-desc">Diseñado para parejas que quieren documentar su boda desde los preparativos hasta los últimos momentos de la celebración.</p>
+              <ul class="pkg-includes">
+                <li><i class="fa-solid fa-check"></i> Cobertura durante 10 horas</li>
+                <li><i class="fa-solid fa-check"></i> Sesión casual previa</li>
+                <li><i class="fa-solid fa-check"></i> Preparativos, ceremonia, sesión formal, retratos familiares y recepción completa.</li>
+                <li><i class="fa-solid fa-check"></i> 500 fotografías digitales editadas y entregadas en USB.</li>
+                <li><i class="fa-solid fa-check"></i> Álbum 10x13” de 30 páginas con diseño editorial.</li>
+                <li><i class="fa-solid fa-check"></i> Ampliación 20x24”</li>
+              </ul>
+              <a href="#contacto" class="btn-gold pkg-cta" style="width:100%;">Cotizar Premium</a>
+            </div>
           </div>
 
-          <div class="stat-cell" role="listitem">
-            <div class="stat-num"
-                 data-count="100" data-suffix="%"
-                 aria-label="100 por ciento">0</div>
-            <div class="stat-lbl">Enfoque<br>personalizado</div>
+          <!-- COMPLETO -->
+          <div class="pkg-card reveal d1">
+            <div class="pkg-media">
+              <img src="img/boda-baile-velas-recepcion.jpeg" alt="Pareja de novios besándose durante la recepción bajo lámparas de mimbre" loading="lazy">
+            </div>
+            <div class="pkg-body">
+              <h3 class="pkg-name">Completo</h3>
+              <div class="pkg-subtitle">Historia sólida de principio a fin</div>
+              <p class="pkg-desc">Pensado para parejas que desean una narrativa más amplia y mayor acompañamiento durante el día.</p>
+              <ul class="pkg-includes">
+                <li><i class="fa-solid fa-check"></i> Cobertura durante 8 horas</li>
+                <li><i class="fa-solid fa-check"></i> Ceremonia, sesión formal, retratos familiares y recepción</li>
+                <li><i class="fa-solid fa-check"></i> 250 fotografías digitales editadas con detalle</li>
+                <li><i class="fa-solid fa-check"></i> USB personalizado</li>
+                <li><i class="fa-solid fa-check"></i> Álbum 10x10” de 20 páginas que contará su historia</li>
+                <li><i class="fa-solid fa-check"></i> Una ampliación 16x20” laminada y montada</li>
+              </ul>
+              <a href="#contacto" class="btn-line pkg-cta" style="width:100%;">Cotizar Completo</a>
+            </div>
           </div>
 
-          <div class="stat-cell" role="listitem">
-            <div class="stat-num"
-                 data-count="300" data-suffix=" DPI"
-                 aria-label="300 DPI">0</div>
-            <div class="stat-lbl">Calidad de<br>impresión profesional</div>
-          </div>
-
-          <div class="stat-cell" role="listitem">
-            <div class="stat-num"
-                 data-count="2" data-suffix=" formatos"
-                 aria-label="2 formatos">0</div>
-            <div class="stat-lbl">Entrega digital<br>+ impresa</div>
+          <!-- ESENCIAL -->
+          <div class="pkg-card reveal d2">
+            <div class="pkg-media">
+              <img src="img/boda-novia-ventana-cortinas.jpeg" alt="Novia en blanco y negro mirando por la ventana junto a su madre y su hija" loading="lazy">
+            </div>
+            <div class="pkg-body">
+              <h3 class="pkg-name">Esencial</h3>
+              <div class="pkg-subtitle">Cobertura emotiva de los momentos más importantes de tu boda</div>
+              <p class="pkg-desc">Ideal para parejas que desean documentar ceremonia y recepción de forma natural y elegante.</p>
+              <ul class="pkg-includes">
+                <li><i class="fa-solid fa-check"></i> Cobertura durante 5 horas continuas</li>
+                <li><i class="fa-solid fa-check"></i> Ceremonia, sesión formal y retratos familiares.</li>
+                <li><i class="fa-solid fa-check"></i> 200 fotografías cuidadosamente seleccionadas y editadas en máxima resolución.</li>
+                <li><i class="fa-solid fa-check"></i> Entrega digital mediante enlace privado de descarga</li>
+              </ul>
+              <a href="#contacto" class="btn-line pkg-cta" style="width:100%;">Cotizar Esencial</a>
+            </div>
           </div>
 
         </div>
@@ -529,13 +468,40 @@
     </section>
 
     <!-- ══════════════════════════════════════════════════
+         FORMAS DE PAGO (copy literal del PDF)
+    ══════════════════════════════════════════════════ -->
+    <section id="pago" aria-labelledby="pago-heading">
+      <div class="container">
+        <div class="pago-copy reveal" style="max-width:640px; margin:0 auto; text-align:center;">
+          <div class="ornament" style="justify-content:center;"><span>Formas de Pago</span></div>
+          <h2 class="section-title" id="pago-heading">Sin complicaciones</h2>
+          <p style="margin-top:24px;">Para gantizar tu fecha, es necesario abonar el <strong>20% del valor contratado</strong> en el momento de la reserva. La fecha será oficialmente agendada luego de la fecha de ese pago.</p>
+          <p>Puede hacer pagos parciales en el transcurso de los meses mientras se acerca su fecha. El saldo restante se liquida 15 dias antes del evento ó el dia de la sesión, lo que suceda primero. <strong>Aceptamos las siguientes formas de pago:</strong></p>
+
+          <div class="pago-methods">
+            <div class="pago-method">
+              <i class="fa-solid fa-money-bill-wave"></i>
+              <span>En efectivo al contado</span>
+            </div>
+            <div class="pago-method">
+              <i class="fa-solid fa-building-columns"></i>
+              <span>Transferencia bancaria</span>
+            </div>
+          </div>
+
+          <p style="margin-top:32px;">Si tienes alguna duda, hazmela saber, seguro te puedo apoyar.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
          OCASIONES
     ══════════════════════════════════════════════════ -->
-    <section id="sectores" aria-labelledby="sec-heading">
+    <section id="ocasiones" aria-labelledby="sec-heading">
       <div class="container">
 
         <div class="sectores-hdr reveal">
-          <div class="label">Ocasiones</div>
+          <div class="ornament" style="justify-content:center;"><span>Ocasiones</span></div>
           <h2 class="section-title" id="sec-heading">
             Celebramos <span class="gold">contigo cada etapa</span>
           </h2>
@@ -576,7 +542,7 @@
 
         <div class="ambientes-top">
           <div class="reveal">
-            <div class="label">XV Años</div>
+            <div class="ornament"><span>XV Años</span></div>
             <h2 class="section-title" id="xv-heading">
               Celebra tus <span class="gold">XV Años</span>
             </h2>
@@ -585,7 +551,6 @@
 
         <div class="ambientes-grid cols-1">
 
-          <!-- XV Años -->
           <div class="amb-card reveal">
             <img class="amb-img"
               src="img/xv-quinceanera-fuente-colonial.jpeg"
@@ -607,13 +572,137 @@
     </section>
 
     <!-- ══════════════════════════════════════════════════
+         TESTIMONIOS (copy literal del PDF)
+    ══════════════════════════════════════════════════ -->
+    <section id="testimonios" class="section-dark" aria-labelledby="testi-heading">
+      <div class="container">
+
+        <div class="testimonios-hdr reveal">
+          <div class="ornament" style="justify-content:center;"><span>Testimonios</span></div>
+          <h2 class="section-title" id="testi-heading">
+            Mira lo que dicen quienes ya vivieron esta <span class="gold">experiencia inolvidable</span>
+          </h2>
+        </div>
+
+        <div class="testimonios-grid">
+          <div class="testi-card reveal">
+            <div class="testi-quote-mark">"</div>
+            <h3 class="testi-heading">¡Super Puntuales!.</h3>
+            <p class="testi-text">"A pesar de que Ezequiel y su equipo venian de otra localidad, llegaron ántes de lo previsto, eso me dio mucha tranquilidad. Excelente trato y atención."</p>
+            <div class="testi-who">
+              <span class="testi-name">Priscila y Roberto</span>
+              <span class="testi-place">Hotel Boutique Hacienda Ucazanaztacua, Pátzcuaro Mich.</span>
+            </div>
+          </div>
+
+          <div class="testi-card reveal d2">
+            <div class="testi-quote-mark">"</div>
+            <h3 class="testi-heading">Muy Organizados</h3>
+            <p class="testi-text">"El habernos reunido ántes, me ayudó bastante, despejaron dudas y pude afinar detalles de mi boda. Eso me dio tranquilidad y pude disfrutar de mi boda como siempre lo soñé."</p>
+            <div class="testi-who">
+              <span class="testi-name">Pao y Alfonso</span>
+              <span class="testi-place">Sahuayo Mich.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+         PREGUNTAS FRECUENTES (copy literal del PDF)
+    ══════════════════════════════════════════════════ -->
+    <section id="faq" aria-labelledby="faq-heading">
+      <div class="container">
+
+        <div class="faq-hdr reveal">
+          <div class="ornament" style="justify-content:center;"><span>Preguntas Frecuentes</span></div>
+          <h2 class="section-title" id="faq-heading">Sesión Fotográfica</h2>
+        </div>
+
+        <div class="faq-list reveal">
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              <span><span class="faq-q-num">01</span>¿De que manera nos ayuda tu servicio a vernos más relajados y salir mejor en las fotografías?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a-wrap">
+              <p class="faq-a">Hacemos una reunión (presencial o virtual) para conocernos, planear la cobertura y asegurarnos de captar lo que para ustedes es más importante. Nos apoyamos de un Cheklist basado en años de experiencia. (sabemos las cosas que reducen estres en una novia) Para que disfruten su evento de principio a fin.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              <span><span class="faq-q-num">02</span>¿Haces fotos espontáneas o dirigidas?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a-wrap">
+              <p class="faq-a">Ambas. Durante el evento priorizamos lo natural, lo documental y lo emotivo Solo intervenimos cuando es necesario, como en fotos de grupo o retratos.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              <span><span class="faq-q-num">03</span>¿Qué pasa si llueve o algo se retrasa?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a-wrap">
+              <p class="faq-a">Nos adaptamos al ritmo real del evento. La cobertura es flexible y estamos preparados para cambios en clima o tiempos.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              <span><span class="faq-q-num">04</span>¿Vas sola/o o con asistente?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a-wrap">
+              <p class="faq-a">Depende del paquete. En coberturas grandes, voy con asistente o segundo fotógrafo para no perder ningún detalle.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              <span><span class="faq-q-num">05</span>¿Podemos ver trabajos anteriores completos?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a-wrap">
+              <p class="faq-a">¡Por supuesto! Si quieres, te comparto galerías privadas de bodas reales para que veas mi estilo de principio a fin.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+         CTA FINAL (copy literal del PDF)
+    ══════════════════════════════════════════════════ -->
+    <section id="cta-final" class="section-dark" aria-label="Llamado a la acción">
+      <div class="cta-final-inner">
+        <div class="cta-final-bg" aria-hidden="true">
+          <img src="img/boda-brindis-pareja-noche.jpeg" alt="" loading="lazy">
+        </div>
+        <div class="cta-final-content reveal">
+          <h2>No dejes para después</h2>
+          <p>Garantiza ya tu fecha y obtén fotografías que eternizan el momento más feliz de tu vida.</p>
+          <a href="#" class="btn-gold js-fb-link" target="_blank" rel="noopener noreferrer">
+            Agenda tu Sesión
+            <i class="fa-solid fa-arrow-right" style="font-size:12px;"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
          CONTACTO
     ══════════════════════════════════════════════════ -->
     <section id="contacto" aria-labelledby="contact-heading">
       <div class="container">
 
         <div class="contact-hdr reveal">
-          <div class="label">Contacto</div>
+          <div class="ornament"><span>Contacto</span></div>
           <h2 class="section-title" id="contact-heading">
             Hablemos de <span class="gold">tu celebración</span>
           </h2>
@@ -639,25 +728,14 @@
               </li>
               <li class="ci-item">
                 <div class="ci-icon" aria-hidden="true">
-                  <i class="fa-solid fa-phone"></i>
+                  <i class="fa-brands fa-facebook-messenger"></i>
                 </div>
                 <div class="ci-body">
-                  <h4>Teléfono</h4>
-                  <p>
-                    <a href="tel:+523411077869">341 107 78 69</a>
-                  </p>
-                </div>
-              </li>
-              <li class="ci-item">
-                <div class="ci-icon" aria-hidden="true">
-                  <i class="fa-brands fa-whatsapp"></i>
-                </div>
-                <div class="ci-body">
-                  <h4>WhatsApp</h4>
-                  <p>Escríbenos y platicamos los detalles de tu sesión.</p>
-                  <a href="#" class="ci-wa-link js-wa-link"
+                  <h4>Messenger</h4>
+                  <p>Escríbenos por Messenger y platicamos los detalles de tu sesión.</p>
+                  <a href="#" class="ci-messenger-link js-messenger-link"
                      target="_blank" rel="noopener noreferrer">
-                    Abrir chat →
+                    Abrir Messenger →
                   </a>
                 </div>
               </li>
@@ -667,7 +745,7 @@
           <!-- Form -->
           <div class="contact-form-wrap">
             <h3>Solicita tu Cotización</h3>
-            <form id="wa-form" novalidate>
+            <form id="messenger-form" novalidate>
               <div class="form-row">
                 <div class="form-group">
                   <label class="form-label" for="f-name">Nombre completo</label>
@@ -692,11 +770,11 @@
                           placeholder="Fecha, locación tentativa, número de invitados o cualquier detalle relevante…"></textarea>
               </div>
               <button type="submit" class="form-submit">
-                <i class="fa-brands fa-whatsapp"></i>
-                Enviar a WhatsApp
+                <i class="fa-brands fa-facebook-messenger"></i>
+                Enviar por Messenger
               </button>
               <p class="form-note">
-                Al enviar serás redirigido a WhatsApp para continuar la conversación.
+                Al enviar copiaremos tu mensaje y abriremos Messenger — solo pégalo para enviarlo.
               </p>
             </form>
           </div>
@@ -721,9 +799,9 @@
         </p>
         <div class="footer-socials">
           <!-- TODO: agregar Instagram / TikTok reales del negocio cuando estén disponibles -->
-          <a href="#" class="footer-soc js-wa-link" target="_blank"
-             rel="noopener noreferrer" aria-label="WhatsApp">
-            <i class="fa-brands fa-whatsapp"></i>
+          <a href="#" class="footer-soc js-messenger-link" target="_blank"
+             rel="noopener noreferrer" aria-label="Messenger">
+            <i class="fa-brands fa-facebook-messenger"></i>
           </a>
         </div>
       </div>
@@ -731,11 +809,11 @@
   </footer>
 
   <!-- ══════════════════════════════════════════════════════
-       FLOATING WHATSAPP
+       FLOATING MESSENGER
   ══════════════════════════════════════════════════════ -->
-  <a href="#" class="wa-btn js-wa-link" target="_blank"
-     rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
-    <i class="fa-brands fa-whatsapp"></i>
+  <a href="#" class="msg-btn js-messenger-link" target="_blank"
+     rel="noopener noreferrer" aria-label="Contactar por Messenger">
+    <i class="fa-brands fa-facebook-messenger"></i>
   </a>
 
   <!-- Scripts -->

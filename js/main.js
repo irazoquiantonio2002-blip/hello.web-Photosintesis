@@ -1,25 +1,28 @@
 /* ══════════════════════════════════════════════════════════
    PHOTOSINTESIS — main.js
-   TODO: reemplaza WHATSAPP_NUMBER con el número real del negocio
-   (formato internacional sin signos, ej. "521XXXXXXXXXX").
    TODO: reemplaza FACEBOOK_URL con la cuenta de Facebook real del negocio.
+   TODO: reemplaza MESSENGER_URL con el enlace m.me real del negocio
+   (formato "https://m.me/usuario-o-id-de-la-pagina").
 ══════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
 
-  var WHATSAPP_NUMBER = '521XXXXXXXXXX';
   var FACEBOOK_URL = 'https://www.facebook.com/PENDIENTE';
+  var MESSENGER_URL = 'https://m.me/PENDIENTE';
 
   document.addEventListener('DOMContentLoaded', function () {
     initLoader();
     initNavbar();
+    initScrollProgress();
     initMobileMenu();
     initHeroCanvas();
+    initHeroParallax();
     initMarquee();
     initReveal();
-    initCounters();
     initPortfolioLightbox();
-    initWhatsAppLinks();
+    initFaqAccordion();
+    initCardTilt();
+    initMessengerLinks();
     initFacebookLinks();
     initContactForm();
     initFooterYear();
@@ -38,16 +41,51 @@
     }
   }
 
-  /* ---------- Navbar scroll state ---------- */
+  /* ---------- Navbar scroll state — solid bg + hide on scroll down / show on scroll up ---------- */
   function initNavbar() {
     var navbar = document.getElementById('navbar');
+    var mobMenu = document.getElementById('mob-menu');
     if (!navbar) return;
+    var lastY = window.scrollY;
+
     function onScroll() {
-      if (window.scrollY > 40) navbar.classList.add('scrolled');
+      var y = window.scrollY;
+
+      if (y > 40) navbar.classList.add('scrolled');
       else navbar.classList.remove('scrolled');
+
+      // Below the desktop nav breakpoint the hamburger is the only way to
+      // reach the menu, so the navbar must never auto-hide there.
+      var menuOpen = mobMenu && mobMenu.classList.contains('open');
+      var isCompact = window.innerWidth < 980;
+      if (!menuOpen && !isCompact) {
+        if (y > lastY && y > 160) {
+          navbar.classList.add('nav-hidden');
+        } else if (y < lastY) {
+          navbar.classList.remove('nav-hidden');
+        }
+      } else {
+        navbar.classList.remove('nav-hidden');
+      }
+      lastY = y;
     }
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  /* ---------- Scroll progress bar ---------- */
+  function initScrollProgress() {
+    var fill = document.getElementById('scroll-progress-fill');
+    if (!fill) return;
+    function update() {
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - doc.clientHeight;
+      var pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+      fill.style.width = pct + '%';
+    }
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
   }
 
   /* ---------- Mobile menu ---------- */
@@ -96,33 +134,46 @@
     }
 
     function seed(w, h) {
-      var count = w < 700 ? 22 : 44;
+      var count = w < 700 ? 85 : 150;
       particles = [];
       for (var i = 0; i < count; i++) {
+        var big = Math.random() < 0.26;
         particles.push({
           x: Math.random() * w,
           y: Math.random() * h,
-          r: Math.random() * 1.8 + 0.6,
-          vy: -(Math.random() * 0.25 + 0.06),
-          vx: (Math.random() - 0.5) * 0.12,
-          a: Math.random() * 0.5 + 0.15
+          r: big ? (Math.random() * 3.6 + 2.8) : (Math.random() * 1.9 + 1),
+          vy: -(Math.random() * 0.34 + 0.08),
+          vx: (Math.random() - 0.5) * 0.18,
+          a: big ? (Math.random() * 0.25 + 0.6) : (Math.random() * 0.45 + 0.45),
+          glow: big,
+          phase: Math.random() * Math.PI * 2,
+          speed: Math.random() * 0.022 + 0.012
         });
       }
     }
 
+    var t = 0;
     function tick() {
       var w = canvas.width / window.devicePixelRatio;
       var h = canvas.height / window.devicePixelRatio;
       ctx.clearRect(0, 0, w, h);
+      t += 1;
       particles.forEach(function (p) {
         p.x += p.vx; p.y += p.vy;
         if (p.y < -10) { p.y = h + 10; p.x = Math.random() * w; }
         if (p.x < -10) p.x = w + 10;
         if (p.x > w + 10) p.x = -10;
+        var twinkle = 0.5 + 0.5 * Math.sin(t * p.speed + p.phase);
+        ctx.save();
+        if (p.glow) {
+          ctx.shadowColor = 'rgba(231,200,119,0.9)';
+          ctx.shadowBlur = p.r * 3.5;
+        }
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(231,200,119,' + p.a + ')';
+        ctx.fillStyle = 'rgba(231,205,140,' + (p.a * twinkle) + ')';
         ctx.fill();
+        ctx.restore();
       });
       raf = requestAnimationFrame(tick);
     }
@@ -130,6 +181,30 @@
     resize();
     window.addEventListener('resize', resize);
     if (!reduced) tick();
+  }
+
+  /* ---------- Hero parallax — subtle translateY on scroll ---------- */
+  function initHeroParallax() {
+    var hero = document.getElementById('hero');
+    var layer = document.getElementById('hero-parallax');
+    if (!hero || !layer) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var ticking = false;
+    function update() {
+      var rect = hero.getBoundingClientRect();
+      if (rect.bottom > 0 && rect.top < window.innerHeight) {
+        var offset = Math.max(0, -rect.top) * 0.18;
+        layer.style.transform = 'translateY(' + offset + 'px)';
+      }
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }, { passive: true });
   }
 
   /* ---------- Marquee content ---------- */
@@ -162,41 +237,76 @@
     items.forEach(function (el) { io.observe(el); });
   }
 
-  /* ---------- Stat counters ---------- */
-  function initCounters() {
-    var nums = document.querySelectorAll('.stat-num');
-    if (!nums.length) return;
+  /* ---------- FAQ accordion ---------- */
+  function initFaqAccordion() {
+    var items = document.querySelectorAll('.faq-item');
+    if (!items.length) return;
 
-    function animate(el) {
-      var target = parseFloat(el.getAttribute('data-count')) || 0;
-      var suffix = el.getAttribute('data-suffix') || '';
-      var duration = 1400;
-      var start = null;
+    items.forEach(function (item) {
+      var btn = item.querySelector('.faq-q');
+      var wrap = item.querySelector('.faq-a-wrap');
+      if (!btn || !wrap) return;
 
-      function step(ts) {
-        if (start === null) start = ts;
-        var progress = Math.min((ts - start) / duration, 1);
-        var eased = 1 - Math.pow(1 - progress, 3);
-        var value = Math.round(target * eased);
-        el.textContent = value + suffix;
-        if (progress < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    }
+      btn.addEventListener('click', function () {
+        var isOpen = btn.getAttribute('aria-expanded') === 'true';
 
-    if (!('IntersectionObserver' in window)) {
-      nums.forEach(animate);
-      return;
-    }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          animate(entry.target);
-          io.unobserve(entry.target);
+        items.forEach(function (other) {
+          if (other === item) return;
+          other.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+          other.querySelector('.faq-a-wrap').style.height = '0px';
+        });
+
+        if (isOpen) {
+          btn.setAttribute('aria-expanded', 'false');
+          wrap.style.height = '0px';
+        } else {
+          btn.setAttribute('aria-expanded', 'true');
+          wrap.style.height = wrap.scrollHeight + 'px';
         }
       });
-    }, { threshold: 0.5 });
-    nums.forEach(function (el) { io.observe(el); });
+    });
+
+    window.addEventListener('resize', function () {
+      items.forEach(function (item) {
+        var btn = item.querySelector('.faq-q');
+        var wrap = item.querySelector('.faq-a-wrap');
+        if (btn.getAttribute('aria-expanded') === 'true') {
+          wrap.style.height = wrap.scrollHeight + 'px';
+        }
+      });
+    });
+  }
+
+  /* ---------- Magnetic tilt on package / service cards ---------- */
+  function initCardTilt() {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var cards = document.querySelectorAll('.pkg-card, .amb-card');
+    cards.forEach(function (card) {
+      var raf = null;
+
+      function onMove(e) {
+        if (raf) return;
+        raf = requestAnimationFrame(function () {
+          var rect = card.getBoundingClientRect();
+          var px = (e.clientX - rect.left) / rect.width;
+          var py = (e.clientY - rect.top) / rect.height;
+          var ry = (px - 0.5) * 10;
+          var rx = (0.5 - py) * 8;
+          card.style.transition = 'transform .08s linear';
+          card.style.transform = 'perspective(1000px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateY(-6px)';
+          raf = null;
+        });
+      }
+      function onLeave() {
+        card.style.transition = 'transform .6s ' + 'cubic-bezier(.22,.9,.25,1)';
+        card.style.transform = '';
+      }
+
+      card.addEventListener('mousemove', onMove);
+      card.addEventListener('mouseleave', onLeave);
+    });
   }
 
   /* ---------- Portfolio lightbox ---------- */
@@ -246,11 +356,10 @@
     });
   }
 
-  /* ---------- WhatsApp links (floating button, contact card, footer) ---------- */
-  function initWhatsAppLinks() {
-    var defaultMsg = 'Hola, visité su sitio web y me gustaría más información.';
-    document.querySelectorAll('.js-wa-link').forEach(function (a) {
-      a.setAttribute('href', 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(defaultMsg));
+  /* ---------- Messenger links (floating button, contact card, footer) ---------- */
+  function initMessengerLinks() {
+    document.querySelectorAll('.js-messenger-link').forEach(function (a) {
+      a.setAttribute('href', MESSENGER_URL);
     });
   }
 
@@ -261,19 +370,24 @@
     });
   }
 
-  /* ---------- Contact form → WhatsApp ---------- */
+  /* ---------- Contact form → Messenger ----------
+     Messenger deep links (m.me) can't carry a prefilled message like wa.me
+     did, so the composed text is copied to the clipboard and Messenger opens
+     for the visitor to paste it in. ---------- */
   function initContactForm() {
-    var form = document.getElementById('wa-form');
+    var form = document.getElementById('messenger-form');
     if (!form) return;
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var name = (document.getElementById('f-name') || {}).value || '';
       var interest = (document.getElementById('f-interest') || {}).value || '';
       var msg = (document.getElementById('f-msg') || {}).value || '';
-
       var text = 'Hola, soy ' + name + '. Me interesa una sesión de: ' + interest + '.\n' + msg;
-      var url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(text);
-      window.open(url, '_blank', 'noopener,noreferrer');
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).catch(function () {});
+      }
+      window.open(MESSENGER_URL, '_blank', 'noopener,noreferrer');
     });
   }
 
