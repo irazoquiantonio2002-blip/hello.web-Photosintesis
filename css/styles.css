@@ -331,7 +331,7 @@ nav[aria-label="Navegación principal"]{ display:flex; }
 .hero-inner{
   position:absolute; inset:0; z-index:3;
   display:flex; align-items:center; justify-content:center;
-  padding:100px 0 320px;
+  padding:100px 0;
   will-change:transform;
 }
 
@@ -760,7 +760,7 @@ footer{ background:var(--dark-bg); border-top:1px solid var(--line-2); padding:5
 @media (max-width:680px){
   .portfolio-grid{ grid-template-columns:repeat(2,1fr); grid-auto-rows:170px; }
   .contact-info, .contact-form-wrap{ padding:40px 26px; }
-  .hero-inner{ padding:120px 0 70px; }
+  .hero-inner{ padding:100px 0; }
   .pago-methods{ flex-direction:column; }
   .faq-q{ font-size:15.5px; }
 
