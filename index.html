@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Photosintesis | Fotografía de Bodas, XV Años y Sesiones Personales</title>
-  <meta name="description" content="Somos Photosíntesis, un equipo de fotógrafos apasionados y esposos, dedicados a capturar los momentos más especiales de tu vida. Fotografía de bodas, XV años y sesiones personales con un enfoque romántico, elegante y lleno de vida.">
-  <meta name="keywords" content="fotografía de bodas, fotógrafo de XV años, sesiones fotográficas, fotografía de graduación, estudio fotográfico, retratos familiares, fotografía de eventos, Photosintesis">
+  <title>Photosintesis | Fotografía de Bodas y XV Años</title>
+  <meta name="description" content="Somos Photosíntesis, un equipo de fotógrafos apasionados y esposos, dedicados a capturar los momentos más especiales de tu vida. Fotografía de bodas y XV años con un enfoque romántico, elegante y lleno de vida.">
+  <meta name="keywords" content="fotografía de bodas, fotógrafo de bodas, fotógrafo de XV años, fotografía de quinceañeras, estudio fotográfico, Photosintesis">
   <meta name="theme-color" content="#faf6ee">
   <meta property="og:title" content="Photosintesis | Wedding Photography">
   <meta property="og:description" content="Un equipo de fotógrafos apasionados y esposos, dedicados a capturar los momentos más especiales de tu vida.">
@@ -107,11 +107,9 @@
   <main>
     <section id="hero" aria-labelledby="hero-heading">
 
-      <!-- Full-width photo, full height (auto), never cropped -->
-      <img class="hero-bg" src="img/boda-portada-silueta-torre.jpeg" alt="" aria-hidden="true">
+      <div class="hero-bg bg-fixed" style="background-image:url('img/boda-portada-silueta-torre.jpeg');" aria-hidden="true"></div>
       <div class="hero-scrim" aria-hidden="true"></div>
       <div class="hero-grain" aria-hidden="true"></div>
-      <canvas id="hero-canvas" aria-hidden="true"></canvas>
 
       <div class="hero-inner" id="hero-parallax">
       <div class="container">
@@ -120,9 +118,8 @@
           <div class="hero-kicker" id="hero-badge" aria-hidden="true">Wedding Photography</div>
 
           <h1 class="hero-title" id="hero-heading">
-            <span class="line"><span>No solo tomamos</span></span>
-            <span class="line"><span>fotografías,</span></span>
-            <span class="line"><span class="accent">creamos recuerdos.</span></span>
+            <span class="line"><span>Creamos recuerdos</span></span>
+            <span class="line"><span class="accent">para siempre</span></span>
           </h1>
 
           <a href="#" class="btn-gold js-fb-link" id="hero-cta" target="_blank" rel="noopener noreferrer">
@@ -143,13 +140,6 @@
     </section>
 
     <!-- ══════════════════════════════════════════════════
-         MARQUEE
-    ══════════════════════════════════════════════════ -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-inner" id="marquee"></div>
-    </div>
-
-    <!-- ══════════════════════════════════════════════════
          NOSOTROS — Quiénes somos (copy literal del PDF)
     ══════════════════════════════════════════════════ -->
     <section id="nosotros" aria-labelledby="nosotros-heading">
@@ -158,7 +148,7 @@
 
           <div class="reveal">
             <div class="nosotros-media">
-              <img src="img/boda-pareja-silueta-artistica.jpeg" alt="Silueta artística de una pareja de novios con luces azul y rojo" loading="lazy">
+              <div class="nosotros-img bg-fixed" style="background-image:url('img/boda-pareja-silueta-artistica.jpeg');" role="img" aria-label="Silueta artística de una pareja de novios con luces azul y rojo"></div>
               <div class="nosotros-frame" aria-hidden="true"></div>
             </div>
           </div>
@@ -183,9 +173,7 @@
          CITA EMOTIVA (copy literal del PDF)
     ══════════════════════════════════════════════════ -->
     <section id="cita" class="section-dark" aria-label="Frase">
-      <div class="cita-bg" aria-hidden="true">
-        <img src="img/boda-pareja-beso-atardecer.jpeg" alt="" loading="lazy">
-      </div>
+      <div class="cita-bg bg-fixed" style="background-image:url('img/boda-pareja-beso-atardecer.jpeg');" aria-hidden="true"></div>
       <div class="cita-content reveal">
         <p class="cita-quote">"El día pasa en un suspiro… pero las fotos lo hacen eterno."</p>
         <p class="cita-sub">Nuestro trabajo es capturar todos esos momentos y emociones para que puedan volver a vivirlo cada vez que lo necesiten.</p>
@@ -215,9 +203,9 @@
 
           <!-- Bodas -->
           <div class="amb-card reveal">
-            <img class="amb-img"
-              src="img/boda-charro-novios-arcos.jpeg"
-              alt="Novios posando frente a arcos coloniales el día de su boda">
+            <div class="amb-img bg-fixed"
+              style="background-image:url('img/boda-charro-novios-arcos.jpeg');"
+              role="img" aria-label="Novios posando frente a arcos coloniales el día de su boda"></div>
             <div class="amb-overlay">
               <div class="amb-icon-wrap"
                    style="background:rgba(207,168,85,0.12); border-color:rgba(207,168,85,0.4);"
@@ -230,21 +218,20 @@
             </div>
           </div>
 
-          <!-- Sesiones Personales -->
+          <!-- XV Años -->
           <div class="amb-card reveal d1">
-            <img class="amb-img"
-              src="img/pareja-sesion-creativa-aerea.jpeg"
-              alt="Sesión de pareja creativa vista desde arriba sobre piso de adoquín"
-              style="object-position:center 30%;">
+            <div class="amb-img bg-fixed"
+              style="background-image:url('img/xv-quinceanera-ramo-sonrisa.jpeg');"
+              role="img" aria-label="Quinceañera sonriendo con su ramo de flores"></div>
             <div class="amb-overlay">
               <div class="amb-icon-wrap"
                    style="background:rgba(207,168,85,0.12); border-color:rgba(207,168,85,0.4);"
                    aria-hidden="true">
-                <i class="fa-solid fa-camera-retro" style="color:var(--gold-light);"></i>
+                <i class="fa-solid fa-crown" style="color:var(--gold-light);"></i>
               </div>
-              <h3>Sesiones Personales</h3>
-              <p>Retratos de pareja, familia o individuales con una propuesta creativa, pensada para verse tan natural como se sintió.</p>
-              <div class="amb-temp">Ideas y locaciones a tu medida</div>
+              <h3>XV Años</h3>
+              <p>Sesiones llenas de magia para celebrar esta transición, con vestidos, locaciones y luz que hacen justicia a la ocasión.</p>
+              <div class="amb-temp">Sesión temática + cobertura del evento</div>
             </div>
           </div>
 
@@ -269,47 +256,37 @@
         <div class="portfolio-grid" role="list">
 
           <a class="portfolio-item reveal" role="listitem" href="img/boda-detalle-anillos-manos.jpeg" data-caption="Detalles">
-            <img src="img/boda-detalle-anillos-manos.jpeg" alt="Detalle del anillo de compromiso sostenido en las manos de la novia" loading="lazy">
+            <div class="pf-img bg-fixed" style="background-image:url('img/boda-detalle-anillos-manos.jpeg');" role="img" aria-label="Detalle del anillo de compromiso sostenido en las manos de la novia"></div>
             <div class="portfolio-overlay"><span>Detalles</span><i class="fa-solid fa-expand"></i></div>
           </a>
 
           <a class="portfolio-item reveal d1" role="listitem" href="img/boda-pareja-atardecer-muelle.jpeg" data-caption="Bodas">
-            <img src="img/boda-pareja-atardecer-muelle.jpeg" alt="Pareja de novios abrazados en un muelle durante el atardecer" loading="lazy">
+            <div class="pf-img bg-fixed" style="background-image:url('img/boda-pareja-atardecer-muelle.jpeg');" role="img" aria-label="Pareja de novios abrazados en un muelle durante el atardecer"></div>
             <div class="portfolio-overlay"><span>Bodas</span><i class="fa-solid fa-expand"></i></div>
           </a>
 
           <a class="portfolio-item reveal d2" role="listitem" href="img/boda-pareja-luces-noche.jpeg" data-caption="Bodas">
-            <img src="img/boda-pareja-luces-noche.jpeg" alt="Pareja de novios entre luces por la noche" loading="lazy">
+            <div class="pf-img bg-fixed" style="background-image:url('img/boda-pareja-luces-noche.jpeg');" role="img" aria-label="Pareja de novios entre luces por la noche"></div>
             <div class="portfolio-overlay"><span>Bodas</span><i class="fa-solid fa-expand"></i></div>
           </a>
 
           <a class="portfolio-item reveal" role="listitem" href="img/boda-recepcion-risas-novia.jpeg" data-caption="Bodas">
-            <img src="img/boda-recepcion-risas-novia.jpeg" alt="Novia riendo durante un momento espontáneo de la recepción" loading="lazy">
+            <div class="pf-img bg-fixed" style="background-image:url('img/boda-recepcion-risas-novia.jpeg');" role="img" aria-label="Novia riendo durante un momento espontáneo de la recepción"></div>
             <div class="portfolio-overlay"><span>Bodas</span><i class="fa-solid fa-expand"></i></div>
           </a>
 
-          <a class="portfolio-item reveal d1" role="listitem" href="img/familia-madre-hija-retrato.jpeg" data-caption="Retratos Familiares">
-            <img src="img/familia-madre-hija-retrato.jpeg" alt="Retrato emotivo de madre e hija frente con frente" loading="lazy">
-            <div class="portfolio-overlay"><span>Familia</span><i class="fa-solid fa-expand"></i></div>
-          </a>
-
-          <a class="portfolio-item reveal d2" role="listitem" href="img/pareja-sesion-casual-piso.jpeg" data-caption="Sesiones Personales">
-            <img src="img/pareja-sesion-casual-piso.jpeg" alt="Pareja en sesión casual sentada sobre piso de mosaico azul" loading="lazy">
-            <div class="portfolio-overlay"><span>Sesiones</span><i class="fa-solid fa-expand"></i></div>
-          </a>
-
           <a class="portfolio-item reveal" role="listitem" href="img/xv-quinceanera-arco-dorado.jpeg" data-caption="XV Años">
-            <img src="img/xv-quinceanera-arco-dorado.jpeg" alt="Quinceañera posando bajo un arco dorado" loading="lazy">
+            <div class="pf-img bg-fixed" style="background-image:url('img/xv-quinceanera-arco-dorado.jpeg');" role="img" aria-label="Quinceañera posando bajo un arco dorado"></div>
             <div class="portfolio-overlay"><span>XV Años</span><i class="fa-solid fa-expand"></i></div>
           </a>
 
           <a class="portfolio-item reveal d1" role="listitem" href="img/xv-quinceanera-lamparas-jardin.jpeg" data-caption="XV Años">
-            <img src="img/xv-quinceanera-lamparas-jardin.jpeg" alt="Quinceañera girando su vestido rosa bajo lámparas de jardín" loading="lazy">
+            <div class="pf-img bg-fixed" style="background-image:url('img/xv-quinceanera-lamparas-jardin.jpeg');" role="img" aria-label="Quinceañera girando su vestido rosa bajo lámparas de jardín"></div>
             <div class="portfolio-overlay"><span>XV Años</span><i class="fa-solid fa-expand"></i></div>
           </a>
 
           <a class="portfolio-item reveal d2" role="listitem" href="img/xv-quinceanera-kiosco-atardecer.jpeg" data-caption="XV Años">
-            <img src="img/xv-quinceanera-kiosco-atardecer.jpeg" alt="Quinceañera posando en un kiosco durante el atardecer" loading="lazy">
+            <div class="pf-img bg-fixed" style="background-image:url('img/xv-quinceanera-kiosco-atardecer.jpeg');" role="img" aria-label="Quinceañera posando en un kiosco durante el atardecer"></div>
             <div class="portfolio-overlay"><span>XV Años</span><i class="fa-solid fa-expand"></i></div>
           </a>
 
@@ -326,7 +303,7 @@
 
           <div class="reveal">
             <div class="proceso-media">
-              <img src="img/boda-novia-espejo-preparacion.jpeg" alt="Novia terminando de arreglarse frente al espejo antes de la boda" loading="lazy">
+              <div class="proceso-img bg-fixed" style="background-image:url('img/boda-novia-espejo-preparacion.jpeg'); background-position:15% center;" role="img" aria-label="Novia terminando de arreglarse frente al espejo antes de la boda"></div>
             </div>
           </div>
 
@@ -399,7 +376,7 @@
           <div class="pkg-card featured reveal">
             <div class="pkg-featured-tag">Más elegido</div>
             <div class="pkg-media">
-              <img src="img/boda-entrada-recepcion-novios.jpeg" alt="Novios bailando durante su entrada a la recepción de la boda" loading="lazy">
+              <div class="pkg-img bg-fixed" style="background-image:url('img/boda-entrada-recepcion-novios.jpeg');" role="img" aria-label="Novios bailando durante su entrada a la recepción de la boda"></div>
             </div>
             <div class="pkg-body">
               <h3 class="pkg-name">Premium</h3>
@@ -420,7 +397,7 @@
           <!-- COMPLETO -->
           <div class="pkg-card reveal d1">
             <div class="pkg-media">
-              <img src="img/boda-baile-velas-recepcion.jpeg" alt="Pareja de novios besándose durante la recepción bajo lámparas de mimbre" loading="lazy">
+              <div class="pkg-img bg-fixed" style="background-image:url('img/boda-baile-velas-recepcion.jpeg');" role="img" aria-label="Pareja de novios besándose durante la recepción bajo lámparas de mimbre"></div>
             </div>
             <div class="pkg-body">
               <h3 class="pkg-name">Completo</h3>
@@ -441,7 +418,7 @@
           <!-- ESENCIAL -->
           <div class="pkg-card reveal d2">
             <div class="pkg-media">
-              <img src="img/boda-novia-ventana-cortinas.jpeg" alt="Novia en blanco y negro mirando por la ventana junto a su madre y su hija" loading="lazy">
+              <div class="pkg-img bg-fixed" style="background-image:url('img/boda-novia-ventana-cortinas.jpeg');" role="img" aria-label="Novia en blanco y negro mirando por la ventana junto a su madre y su hija"></div>
             </div>
             <div class="pkg-body">
               <h3 class="pkg-name">Esencial</h3>
@@ -511,18 +488,6 @@
             <i class="fa-solid fa-crown sector-icon" aria-hidden="true"></i>
             <h3>XV Años</h3>
           </div>
-          <div class="sector-card reveal d2" role="listitem">
-            <i class="fa-solid fa-graduation-cap sector-icon" aria-hidden="true"></i>
-            <h3>Graduaciones</h3>
-          </div>
-          <div class="sector-card reveal d3" role="listitem">
-            <i class="fa-solid fa-people-roof sector-icon" aria-hidden="true"></i>
-            <h3>Retratos Familiares</h3>
-          </div>
-          <div class="sector-card reveal d4" role="listitem">
-            <i class="fa-solid fa-camera-retro sector-icon" aria-hidden="true"></i>
-            <h3>Sesiones de Pareja</h3>
-          </div>
         </div>
 
       </div>
@@ -546,9 +511,9 @@
         <div class="ambientes-grid cols-1">
 
           <div class="amb-card reveal">
-            <img class="amb-img"
-              src="img/xv-quinceanera-fuente-colonial.jpeg"
-              alt="Quinceañera con vestido rosa posando frente a una fuente colonial">
+            <div class="amb-img bg-fixed"
+              style="background-image:url('img/xv-quinceanera-fuente-colonial.jpeg');"
+              role="img" aria-label="Quinceañera con vestido rosa posando frente a una fuente colonial"></div>
             <div class="amb-overlay">
               <div class="amb-icon-wrap"
                    style="background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.3);"
@@ -675,9 +640,7 @@
     ══════════════════════════════════════════════════ -->
     <section id="cta-final" class="section-dark" aria-label="Llamado a la acción">
       <div class="cta-final-inner">
-        <div class="cta-final-bg" aria-hidden="true">
-          <img src="img/boda-brindis-pareja-noche.jpeg" alt="" loading="lazy">
-        </div>
+        <div class="cta-final-bg bg-fixed" style="background-image:url('img/boda-brindis-pareja-noche.jpeg');" aria-hidden="true"></div>
         <div class="cta-final-content reveal">
           <h2>No dejes para después</h2>
           <p>Garantiza ya tu fecha y obtén fotografías que eternizan el momento más feliz de tu vida.</p>
@@ -751,9 +714,6 @@
                   <select id="f-interest" class="form-control">
                     <option>Boda</option>
                     <option>XV Años</option>
-                    <option>Graduación</option>
-                    <option>Sesión de Pareja</option>
-                    <option>Retrato Familiar</option>
                     <option>Otro evento</option>
                   </select>
                 </div>

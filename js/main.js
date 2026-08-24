@@ -12,9 +12,7 @@
     initNavbar();
     initScrollProgress();
     initMobileMenu();
-    initHeroCanvas();
     initHeroParallax();
-    initMarquee();
     initReveal();
     initPortfolioLightbox();
     initFaqAccordion();
@@ -107,76 +105,6 @@
     });
   }
 
-  /* ---------- Hero canvas — floating light particles ---------- */
-  function initHeroCanvas() {
-    var canvas = document.getElementById('hero-canvas');
-    if (!canvas || !canvas.getContext) return;
-    var ctx = canvas.getContext('2d');
-    var hero = document.getElementById('hero');
-    var particles = [];
-    var raf;
-    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    function resize() {
-      var rect = hero.getBoundingClientRect();
-      canvas.width = rect.width * window.devicePixelRatio;
-      canvas.height = rect.height * window.devicePixelRatio;
-      canvas.style.width = rect.width + 'px';
-      canvas.style.height = rect.height + 'px';
-      ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
-      seed(rect.width, rect.height);
-    }
-
-    function seed(w, h) {
-      var count = w < 700 ? 85 : 150;
-      particles = [];
-      for (var i = 0; i < count; i++) {
-        var big = Math.random() < 0.26;
-        particles.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          r: big ? (Math.random() * 3.6 + 2.8) : (Math.random() * 1.9 + 1),
-          vy: -(Math.random() * 0.34 + 0.08),
-          vx: (Math.random() - 0.5) * 0.18,
-          a: big ? (Math.random() * 0.25 + 0.6) : (Math.random() * 0.45 + 0.45),
-          glow: big,
-          phase: Math.random() * Math.PI * 2,
-          speed: Math.random() * 0.022 + 0.012
-        });
-      }
-    }
-
-    var t = 0;
-    function tick() {
-      var w = canvas.width / window.devicePixelRatio;
-      var h = canvas.height / window.devicePixelRatio;
-      ctx.clearRect(0, 0, w, h);
-      t += 1;
-      particles.forEach(function (p) {
-        p.x += p.vx; p.y += p.vy;
-        if (p.y < -10) { p.y = h + 10; p.x = Math.random() * w; }
-        if (p.x < -10) p.x = w + 10;
-        if (p.x > w + 10) p.x = -10;
-        var twinkle = 0.5 + 0.5 * Math.sin(t * p.speed + p.phase);
-        ctx.save();
-        if (p.glow) {
-          ctx.shadowColor = 'rgba(231,200,119,0.9)';
-          ctx.shadowBlur = p.r * 3.5;
-        }
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(231,205,140,' + (p.a * twinkle) + ')';
-        ctx.fill();
-        ctx.restore();
-      });
-      raf = requestAnimationFrame(tick);
-    }
-
-    resize();
-    window.addEventListener('resize', resize);
-    if (!reduced) tick();
-  }
-
   /* ---------- Hero parallax — subtle translateY on scroll ---------- */
   function initHeroParallax() {
     var hero = document.getElementById('hero');
@@ -199,17 +127,6 @@
         ticking = true;
       }
     }, { passive: true });
-  }
-
-  /* ---------- Marquee content ---------- */
-  function initMarquee() {
-    var el = document.getElementById('marquee');
-    if (!el) return;
-    var words = ['Bodas', 'XV Años', 'Sesiones Personales', 'Retratos Familiares', 'Graduaciones', 'Creamos recuerdos para siempre'];
-    var unit = words.map(function (w) {
-      return '<span>' + w + ' <i class="fa-solid fa-star" style="font-size:9px; opacity:.6;"></i></span>';
-    }).join('');
-    el.innerHTML = unit + unit; // duplicated for seamless loop
   }
 
   /* ---------- Reveal on scroll ---------- */
@@ -323,9 +240,9 @@
     var closeBtn = box.querySelector('.lightbox-close');
 
     function open(item) {
-      var img = item.querySelector('img');
+      var thumb = item.querySelector('.pf-img');
       frameImg.src = item.getAttribute('href');
-      frameImg.alt = img ? img.alt : '';
+      frameImg.alt = thumb ? thumb.getAttribute('aria-label') : '';
       caption.textContent = item.getAttribute('data-caption') || '';
       box.classList.add('open');
       document.body.style.overflow = 'hidden';
